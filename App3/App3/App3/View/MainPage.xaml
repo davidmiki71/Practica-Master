@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:App3"
+             x:Name="MainPage"
+             x:Class="App3.MainPage">
+    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+        <Label Text="Ingrese su filtro:" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Entry Text="{Binding NuevoFiltro}" WidthRequest="150"  HorizontalOptions="Start" VerticalOptions="Center"/>
+    </StackLayout>
+    <StackLayout>
+        <ListView ItemsSource="{Binding listPersonList}">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <!--<TextCell Text="{Binding Nombre}" Detail="{Binding Descripcion}" />-->
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Nombre}" VerticalOptions="Center" />
+                            <Image Source="trash.png" HorizontalOptions="EndAndExpand" VerticalOptions="Start" >
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.EliminarPersonaCommand, Source={x:Reference MainPage}}"
+                                                          CommandParameter="{Binding Id}"   />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Entry  Text="{Binding NuevoIngreso}"/>
+        <Button BackgroundColor="#8FBDFF" Text="Agregar Persona" Command="{Binding AgregarPersonaCommand}" />
+    </StackLayout> 
+</ContentPage>
